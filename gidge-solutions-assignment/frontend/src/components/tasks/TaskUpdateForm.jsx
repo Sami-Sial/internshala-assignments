@@ -25,7 +25,7 @@ function TaskUpdateForm({ task, onTaskUpdated, onCancel }) {
       setError('');
       setLoading(true);
       
-      const {data} = await axios.put(`http://localhost:8080/api/tasks/${task._id}`, formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
+      const {data} = await axios.put(`https://gidge-solutions-assignment-backend.vercel.app/api/tasks/${task._id}`, formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
       onTaskUpdated(data.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update task');

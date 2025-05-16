@@ -1,0 +1,73 @@
+.input {
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.input label {
+  position: absolute;
+  top: -10px;
+  background-color: white;
+  left: 3px;
+  color: rgba(108, 37, 225, 1);
+  padding: 0 7px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input input,
+.input select,
+.input textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border: 2px solid rgba(108, 37, 225, 0.8);
+  outline: none;
+}
+
+.active-link {
+  border: 1px solid grey;
+  border-radius: 2px;
+  color: blue;
+}
+
+.sidebar-link {
+  color: white;
+  text-decoration: none;
+}
+.sidebar-link:focus {
+  color: blue;
+}
+
+#user-sidebar {
+  min-height: calc(100vh - 5.6rem);
+  flex-direction: column;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  #container {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  #user-sidebar {
+    min-height: fit-content;
+    flex-direction: row;
+    padding: 10px 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #manage-tasks-top {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

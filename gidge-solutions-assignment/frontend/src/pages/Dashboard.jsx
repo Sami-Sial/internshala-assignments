@@ -25,7 +25,7 @@ function Dashboard() {
     try {
       setLoading(true);
 
-      const {data} = await axios.get('http://localhost:8080/api/projects', {headers: {"Authorization": `Bearer ${token}`}});
+      const {data} = await axios.get('https://gidge-solutions-assignment-backend.vercel.app/api/projects', {headers: {"Authorization": `Bearer ${token}`}});
       setProjects(data.data);
       setError('');
       console.log(data);
@@ -44,7 +44,7 @@ function Dashboard() {
 
   const handleDeleteProject = async (projectId) => {
     try {
-      await axios.delete(`http://localhost:8080/api/projects/${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
+      await axios.delete(`https://gidge-solutions-assignment-backend.vercel.app/api/projects/${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
       setProjects(projects.filter(project => project._id !== projectId));
     } catch (err) {
       setError('Failed to delete project');
@@ -53,7 +53,9 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    toast.error(error)
+    if(error) {
+      toast.error(error)
+    }
   }, [error])
 
   return (

@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 // Login function
 const login = async (email, password) => {
     try {
-      const {data} = await axios.post('http://localhost:8080/api/auth/login', { email, password }, {"Content-Type": "application/json"});
+      const {data} = await axios.post('https://gidge-solutions-assignment-backend.vercel.app/api/auth/login', { email, password }, {headers: {"Content-Type": "application/json"}});
             
       // Save to localStorage
       localStorage.setItem('token', data.token);
@@ -43,14 +43,14 @@ const login = async (email, password) => {
   // Signup function
   const signup = async (userData) => {
     try {
-      const {data} = await axios.post('http://localhost:8080/api/auth/signup', userData, {"Content-Type": "application/json"});
+      const {data} = await axios.post('https://gidge-solutions-assignment-backend.vercel.app/api/auth/signup', userData, {headers: {"Content-Type": "application/json"}});
        console.log(data);     
       // Save to localStorage
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
             
-      setCurrentUser(user);
-      return user;
+      setCurrentUser(data.user);
+      return data.user;
     } catch (error) {
       console.log(error);
       throw error.response?.data?.message || 'Signup failed';

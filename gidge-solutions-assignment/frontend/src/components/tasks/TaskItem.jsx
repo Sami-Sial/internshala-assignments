@@ -25,7 +25,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }) {
   const handleStatusChange = async (newStatus) => {
     try {
       setIsUpdating(true);
-      const response = await axios.put(`http://localhost:8080/api/tasks/${task._id}`, {
+      const response = await axios.put(`https://gidge-solutions-assignment-backend.vercel.app/api/tasks/${task._id}`, {
         ...task,
         status: newStatus
       }, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
@@ -40,7 +40,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }) {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`http://localhost:8080/api/tasks/${task._id}`, {headers: {"Authorization": `Bearer ${token}`}});
+        await axios.delete(`https://gidge-solutions-assignment-backend.vercel.app/api/tasks/${task._id}`, {headers: {"Authorization": `Bearer ${token}`}});
         onTaskDeleted(task._id);
       } catch (err) {
         console.error('Failed to delete task:', err);

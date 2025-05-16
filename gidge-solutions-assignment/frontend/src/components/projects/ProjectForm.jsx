@@ -25,7 +25,7 @@ function ProjectForm({ onProjectCreated, onCancel }) {
       setError('');
       setLoading(true);
       
-      const {data} = await axios.post('http://localhost:8080/api/projects', formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
+      const {data} = await axios.post('https://gidge-solutions-assignment-backend.vercel.app/api/projects', formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
       onProjectCreated(data.data);
       console.log(data);
     } catch (err) {

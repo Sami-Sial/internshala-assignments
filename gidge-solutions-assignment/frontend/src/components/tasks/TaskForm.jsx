@@ -26,7 +26,7 @@ function TaskForm({ projectId, onTaskCreated, onCancel }) {
       setError('');
       setLoading(true);
       
-      const response = await axios.post('http://localhost:8080/api/tasks', formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
+      const response = await axios.post('https://gidge-solutions-assignment-backend.vercel.app/api/tasks', formData, {headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}});
       onTaskCreated(response.data.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create task');

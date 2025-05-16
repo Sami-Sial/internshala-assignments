@@ -6,6 +6,7 @@ function ProjectCard({ project, onDelete }) {
     e.preventDefault();
     e.stopPropagation();
     
+    // confirm deletion
     if (window.confirm('Are you sure you want to delete this project?')) {
       onDelete(project._id);
     }

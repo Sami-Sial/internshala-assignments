@@ -27,11 +27,11 @@ function ProjectDetails() {
       setLoading(true);
       
       // Fetch project details
-      const {data} = await axios.get(`http://localhost:8080/api/projects/${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
+      const {data} = await axios.get(`https://gidge-solutions-assignment-backend.vercel.app/api/projects/${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
       setProject(data.data);
       
       // Fetch tasks for this project
-      const response = await axios.get(`http://localhost:8080/api/tasks?projectId=${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
+      const response = await axios.get(`https://gidge-solutions-assignment-backend.vercel.app/api/tasks?projectId=${projectId}`, {headers: {"Authorization": `Bearer ${token}`}});
       setTasks(response.data.data);
       
       setError('');
@@ -63,7 +63,9 @@ function ProjectDetails() {
   };
 
   useEffect(() => {
-    toast.error(error);
+    if(error) {
+      toast.error(error);
+    }
   }, [error])
 
   if (loading) {

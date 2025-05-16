@@ -40,29 +40,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log("server is listening on " + PORT);
-});
-
-// Web sockets connection using socket.io
-const io = require("socket.io")(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: process.env.FRONTEND_URL,
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log("user conneccted to socket.io", socket.id);
-
-  socket.on("setup", (userData) => {
-    console.log("user joined room", userData);
-
-    socket.join(userData?._id);
-    socket.emit("connected");
-  });
-
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
 });

@@ -23,7 +23,7 @@ export function TasksProvider({ children }) {
   }) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/tasks?created=${created}&assigned=${assigned}&status=${status}&priority=${priority}&dueBefore=${dueBefore}&dueAfter=${dueAfter}&overdue=${overdue}&search=${search}`,
+        `https://nextjs-taskifyer-backend.vercel.app/tasks?created=${created}&assigned=${assigned}&status=${status}&priority=${priority}&dueBefore=${dueBefore}&dueAfter=${dueAfter}&overdue=${overdue}&search=${search}`,
         {
           withCredentials: true,
         }
@@ -40,7 +40,7 @@ export function TasksProvider({ children }) {
   const createTask = async (formData) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/tasks",
+        "https://nextjs-taskifyer-backend.vercel.app/tasks",
         formData,
         {
           withCredentials: true,
@@ -58,7 +58,7 @@ export function TasksProvider({ children }) {
   const updateTask = async (formData, taskId) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8080/tasks/${taskId}`,
+        `https://nextjs-taskifyer-backend.vercel.app/tasks/${taskId}`,
         formData,
         {
           withCredentials: true,
@@ -76,7 +76,7 @@ export function TasksProvider({ children }) {
   const deleteTask = async (taskId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:8080/tasks/${taskId}`,
+        `https://nextjs-taskifyer-backend.vercel.app/tasks/${taskId}`,
         {
           withCredentials: true,
         }
@@ -94,7 +94,7 @@ export function TasksProvider({ children }) {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:8080/tasks/${id}/assign/${assignedTo}`,
+        `https://nextjs-taskifyer-backend.vercel.app/tasks/${id}/assign/${assignedTo}`,
         {},
         {
           withCredentials: true,

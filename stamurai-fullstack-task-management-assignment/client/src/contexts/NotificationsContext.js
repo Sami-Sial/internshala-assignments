@@ -13,9 +13,12 @@ export function NotificationsProvider({ children }) {
 
   const getUsersNotifications = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/notifications`, {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        `https://nextjs-taskifyer-backend.vercel.app/notifications`,
+        {
+          withCredentials: true,
+        }
+      );
 
       console.log(data);
       setNotifications(data);
@@ -28,7 +31,7 @@ export function NotificationsProvider({ children }) {
   const markAsReadAllNotifications = async () => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8080/notifications/read-all`,
+        `https://nextjs-taskifyer-backend.vercel.app/notifications/read-all`,
         {},
         {
           withCredentials: true,
@@ -46,7 +49,7 @@ export function NotificationsProvider({ children }) {
   // const markAsReadOneNotification = async (id) => {
   //   try {
   //     const { data } = await axios.put(
-  //       `http://localhost:8080/notifications/${id}/read`,
+  //       `https://nextjs-taskifyer-backend.vercel.app/notifications/${id}/read`,
   //       {
   //         withCredentials: true,
   //       }

@@ -19,9 +19,12 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/me", {
-          withCredentials: true,
-        });
+        const { data } = await axios.get(
+          "https://nextjs-taskifyer-backend.vercel.app/me",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(data);
         setCurrentUser(data);
       } catch (error) {
@@ -40,7 +43,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/login",
+        "https://nextjs-taskifyer-backend.vercel.app/login",
         { email, password },
         {
           withCredentials: true,
@@ -61,7 +64,7 @@ export function AuthProvider({ children }) {
   const signup = async (userData) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/register",
+        "https://nextjs-taskifyer-backend.vercel.app/register",
         userData,
         {
           withCredentials: true,
@@ -81,7 +84,7 @@ export function AuthProvider({ children }) {
   // Logout function
   const logout = async () => {
     try {
-      await axios.get("http://localhost:8080/logout", {
+      await axios.get("https://nextjs-taskifyer-backend.vercel.app/logout", {
         withCredentials: true,
       });
       setCurrentUser(null);
@@ -94,9 +97,12 @@ export function AuthProvider({ children }) {
   //Get all users
   const getUsers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/users", {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        "https://nextjs-taskifyer-backend.vercel.app/users",
+        {
+          withCredentials: true,
+        }
+      );
       console.log(data);
 
       setUsers(data);

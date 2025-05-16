@@ -11,10 +11,9 @@ import AllOutIcon from "@mui/icons-material/AllOut";
 
 const Tasks = () => {
   const { tasks, setTasks, fetchAllTasks } = useTasks();
-  let links;
 
   useEffect(() => {
-    links = document.querySelectorAll(".link");
+    let links = document.querySelectorAll(".link");
 
     links.forEach((link, i, arr) => {
       link.addEventListener("click", (e) => {
@@ -28,13 +27,14 @@ const Tasks = () => {
   });
 
   useEffect(() => {
+    let links = document.querySelectorAll(".link");
     links[0].classList.add("active-link");
 
     const getTasks = async () => {
       await fetchAllTasks();
     };
     getTasks();
-  }, []);
+  }, [fetchAllTasks]);
 
   return (
     <div>

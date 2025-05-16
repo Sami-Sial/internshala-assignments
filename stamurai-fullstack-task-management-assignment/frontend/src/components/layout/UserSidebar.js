@@ -28,10 +28,9 @@ const UserSidebar = () => {
   const [showAllNotifModal, setShowAllNotifModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  let sidebarLinks;
 
   useEffect(() => {
-    sidebarLinks = document.querySelectorAll(".sidebar-link");
+    let sidebarLinks = document.querySelectorAll(".sidebar-link");
     sidebarLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         sidebarLinks.forEach((link) => {
@@ -60,6 +59,8 @@ const UserSidebar = () => {
   };
 
   useEffect(() => {
+    let sidebarLinks = document.querySelectorAll(".sidebar-link");
+
     sidebarLinks[0].classList.add("active-sidebar-link");
   }, []);
 

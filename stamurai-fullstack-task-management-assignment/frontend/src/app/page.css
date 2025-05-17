@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .input {
   position: relative;
   margin-bottom: 2px;
@@ -46,21 +50,42 @@ textarea:focus {
   color: blue;
 }
 
-#user-sidebar {
-  min-height: calc(100vh - 5.6rem);
+#user-sidebar,
+#admin-sidebar {
+  height: calc(100vh - 5.6rem);
   flex-direction: column;
   padding: 1rem;
 }
 
+#user-main,
+#admin-main {
+  height: calc(100vh - 5.5rem);
+  width: calc(100vw - 1rem);
+}
+
 @media screen and (max-width: 800px) {
-  #container {
+  #user-container,
+  #admin-container {
     flex-wrap: wrap;
     flex-direction: column;
   }
-  #user-sidebar {
-    min-height: fit-content;
+
+  #admin-task-filter {
+    flex-direction: column;
+  }
+  #admin-task-filter > div {
+    width: 100%;
+  }
+  #user-sidebar,
+  #admin-sidebar {
+    height: fit-content;
     flex-direction: row;
     padding: 10px 1rem;
+  }
+  #user-main,
+  #admin-main {
+    height: calc(100vh - 9rem);
+    width: 100vw;
   }
 }
 

@@ -19,6 +19,7 @@ import TaskItem from "./TaskItem";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { useNotifications } from "@/contexts/NotificationsContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Tasks = () => {
   const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
@@ -33,6 +34,7 @@ const Tasks = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { tasks, setTasks, fetchAllTasks, createTask } = useTasks();
+  const { currentUser } = useAuth();
 
   let links;
 
@@ -195,24 +197,30 @@ const Tasks = () => {
                 My Tasks
               </p>
             </div>
-            <div style={{ display: "flex", gap: "5px", marginTop: "10px" }}>
-              <AssignmentAddIcon />
-              <p
-                style={{ cursor: "pointer", padding: "0 3px", width: "100px" }}
-                className="link"
-                onClick={() =>
-                  setFilter({
-                    ...filter,
-                    assigned: "me",
-                    created: "",
-                    overdue: false,
-                    search: "",
-                  })
-                }
-              >
-                Assigned to me
-              </p>
-            </div>
+            {currentUser?.role === "user" && (
+              <div style={{ display: "flex", gap: "5px", marginTop: "10px" }}>
+                <AssignmentAddIcon />
+                <p
+                  style={{
+                    cursor: "pointer",
+                    padding: "0 3px",
+                    width: "100px",
+                  }}
+                  className="link"
+                  onClick={() =>
+                    setFilter({
+                      ...filter,
+                      assigned: "me",
+                      created: "",
+                      overdue: false,
+                      search: "",
+                    })
+                  }
+                >
+                  Assigned to me
+                </p>
+              </div>
+            )}
             <div style={{ display: "flex", gap: "5px", marginTop: "10px" }}>
               <UpdateDisabledIcon />
               <p

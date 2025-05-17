@@ -11,11 +11,17 @@ export default function Layout({ children }) {
 
   if (currentUser?.role === "user") {
     return (
-      <div id="container" style={{ display: "flex" }}>
+      <div id="user-container" style={{ display: "flex" }}>
         <div>
           <UserSidebar />
         </div>
-        <div id="user-main" style={{ width: "calc(100vw - 1rem)" }}>
+        <div
+          id="user-main"
+          style={{
+            overflowY: "auto",
+            scrollbarWidth: "thin",
+          }}
+        >
           {children}
         </div>
       </div>

@@ -2,6 +2,34 @@ const Task = require("../models/task.model");
 const User = require("../models/user.model");
 const Notification = require("../models/notification.model");
 
+exports.getTasksAnalytics = async (req, res) => {
+  const overdueTasks = await Task.find({
+    dueDate: { $lt: new Date() },
+    status: { $ne: "completed" },
+  }).countDocuments();
+
+  const tasks = await Task.find();
+
+  console.log(tasks);
+  console.log(tasks.length);
+
+  res.json({
+    totalTasks: tasks.length,
+    overdueTasks: overdueTasks,
+    assignedTasks: tasks.filter((task) => task.assignedTo).length,
+    completedTasks: tasks.filter((task) => task.status === "completed").length,
+    pendingTasks: tasks.filter((task) => task.status === "pending").length,
+    todoTasks: tasks.filter((task) => task.status === "to-do").length,
+    inReviewTasks: tasks.filter((task) => task.status === "review").length,
+    inProgressTasks: tasks.filter((task) => task.status === "in-progress")
+      .length,
+    mediumPriorityTasks: tasks.filter((task) => task.priority === "medium")
+      .length,
+    highPriorityTasks: tasks.filter((task) => task.priority === "high").length,
+    lowPriorityTasks: tasks.filter((task) => task.priority === "low").length,
+  });
+};
+
 exports.getAllTasks = async (req, res) => {
   try {
     console.log(req.query);
@@ -45,9 +73,14 @@ exports.getAllTasks = async (req, res) => {
     }
 
     // Get tasks with pagination
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
+    let page,
+      limit,
+      skip = 0;
+    if (req.user.role === "user") {
+      page = parseInt(req.query.page) || 1;
+      limit = parseInt(req.query.limit) || 10;
+      skip = (page - 1) * limit;
+    }
 
     const tasks = await Task.find(filters)
       .populate("createdBy", "name email")

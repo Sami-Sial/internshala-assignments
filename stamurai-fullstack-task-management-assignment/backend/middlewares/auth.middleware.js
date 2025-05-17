@@ -35,3 +35,17 @@ exports.protect = async (req, res, next) => {
     return res.status(401).json({ message: "Not authorized, token failed" });
   }
 };
+
+exports.isAdmin = (req, res, next) => {
+  console.log(req.user);
+  if (req.user.role !== "admin") {
+    return next(
+      new ErrorHandler(
+        403,
+        `Role: ${req.user.role} is not allowed to access this resource`
+      )
+    );
+  }
+
+  next();
+};

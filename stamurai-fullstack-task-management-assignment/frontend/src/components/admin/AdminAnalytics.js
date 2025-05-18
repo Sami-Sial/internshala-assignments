@@ -16,7 +16,7 @@ const AdminAnalytics = () => {
     const getTasksAnalytics = async () => {
       try {
         const { data } = await axios.get(
-          "https://nextjs-taskifyer-backend.vercel.app/tasks/analytics",
+          "http://localhost:8080/tasks/analytics",
           { withCredentials: true }
         );
 

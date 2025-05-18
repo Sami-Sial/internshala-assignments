@@ -7,11 +7,9 @@ exports.getTasksAnalytics = async (req, res) => {
     dueDate: { $lt: new Date() },
     status: { $ne: "completed" },
   }).countDocuments();
+  console.log(overdueTasks);
 
   const tasks = await Task.find();
-
-  console.log(tasks);
-  console.log(tasks.length);
 
   res.json({
     totalTasks: tasks.length,
@@ -32,9 +30,8 @@ exports.getTasksAnalytics = async (req, res) => {
 
 exports.getAllTasks = async (req, res) => {
   try {
-    console.log(req.query);
-
     const filters = {};
+    console.log(req.query);
 
     // Apply filters if provided
     if (req.query.status && req.query.status !== "all")
@@ -67,7 +64,7 @@ exports.getAllTasks = async (req, res) => {
     }
 
     // If overdue flag is set, get tasks that are past due date and not completed
-    if (req.query.overdue === true) {
+    if (req.query.overdue == "true") {
       filters.dueDate = { $lt: new Date() };
       filters.status = { $ne: "completed" };
     }

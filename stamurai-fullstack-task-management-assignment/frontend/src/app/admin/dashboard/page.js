@@ -44,6 +44,8 @@ const page = () => {
       setError("");
       setLoading(true);
 
+      console.log(filter);
+
       await fetchAllTasks(filter);
     } catch (err) {
       setError(err.toString());
